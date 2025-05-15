@@ -18,12 +18,17 @@ public class App
         server.Prefixes.Add(host);
         Console.WriteLine("Sever listening on..." + host);
 
-        var authController = new AuthController();
+        var userRepository = new MockUserRepository();
+        var userService = new MockUserService(userRepository);
+        var userController = new UserController(userService);
+        var authController = new AuthController(userService);
+
         router = new HttpRouter();
 
         router.AddGet("/", authController.LandingPageGet);
+        router.AddGet("/users", userController.ViewAllget);
     }
-    
+
     public async Task Start()
     {
         server.Start();
