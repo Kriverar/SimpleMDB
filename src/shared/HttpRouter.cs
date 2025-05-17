@@ -48,7 +48,6 @@ public class HttpRouter
 
     public async Task Handle(HttpListenerRequest req, HttpListenerResponse res, Hashtable options)
     {
-        res.StatusCode = Response_Not_Sent_YET;
 
         foreach (var middleware in middlewares)
         {
