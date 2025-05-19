@@ -18,3 +18,4 @@ public class Result<T>
         Error = error;
     }
 }
+
