@@ -72,13 +72,20 @@ public class MockUserRepository : IUserRepository
 
     public async Task<User?> Delete(int id)
     {
-         User? user = users.FirstOrDefault((u) => u.Id == id);
+        User? user = users.FirstOrDefault((u) => u.Id == id);
 
         if (user != null)
         {
             users.Remove(user);
         }
-         
+
+        return await Task.FromResult(user);
+    }
+
+    public async Task<User?> GetUserByUserName(string username)
+    {
+        User? user = users.FirstOrDefault((u) => u.Username == username);
+
         return await Task.FromResult(user);
     }
 }

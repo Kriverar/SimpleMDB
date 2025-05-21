@@ -19,6 +19,7 @@ public class MovieHtmlTemplates
                 <td>{movie.Rating}</td>
                 <td><a href=""/movies/view?mid={movie.Id}"">View</a></td>
                 <td><a href=""/movies/edit?mid={movie.Id}"">Edit</a></td>
+                <td><a href=""/movies/actors?mid={movie.Id}"">Actors</a></td>
                 <td><form action=""/movies/remove?mid={movie.Id}"" method=""POST"" onsubmit=""return confirm('Are you sure that you want to delete this movie?')"">
                 <input type=""submit"" value=""Remove"">
                 </form>
@@ -26,6 +27,8 @@ public class MovieHtmlTemplates
                 </tr>
                 ";
         }
+        string pDisable = (page > 1).ToString().ToLower();
+        string nDisable = (page < pageCount).ToString().ToLower();
 
         string html = @$"
         <div class=""add"">
@@ -38,8 +41,7 @@ public class MovieHtmlTemplates
                     <th>Year</th>
                     <th>Description</th>
                     <th>Rating</th>
-                    <th>View</th>
-                    <th>Edit</th>
+                    <th>Actors</th>
                     <th>Remove</th>
                 </thead>
                 <tbody>
@@ -47,11 +49,11 @@ public class MovieHtmlTemplates
                 </tbody>
             </table>
             <div class=""pagination"">
-                <a href=""?page=1&size={size}"">First</a>
-                <a href=""?page={page - 1}&size={size}"">Prev</a>
+                <a href=""?page=1&size={size}"" onclick=""return {pDisable};"">First</a>
+                <a href=""?page={page - 1}&size={size}"" onclick=""return {pDisable};"">Prev</a>
                 <span> {page} / {pageCount}</span> 
-                <a href=""?page={page + 1}&size={size}"">Next</a>
-                <a href=""?page={pageCount}&size={size}"">Last</a>
+                <a href=""?page={page + 1}&size={size}"" onclick=""return {nDisable};"">Next</a>
+                <a href=""?page={pageCount}&size={size}"" onclick=""return {nDisable};"">Last</a>
             </div>
             ";
         return html;

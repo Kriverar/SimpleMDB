@@ -26,6 +26,8 @@ public class UserHtmlTemplates
                 </tr>
                 ";
         }
+        string pDisable = (page > 1).ToString().ToLower();
+        string nDisable = (page < pageCount).ToString().ToLower();
 
         string html = @$"
         <div class=""add"">
@@ -47,11 +49,11 @@ public class UserHtmlTemplates
                 </tbody>
             </table>
             <div class=""pagination"">
-                <a href=""?page=1&size={size}"">First</a>
-                <a href=""?page={page - 1}&size={size}"">Prev</a>
+                <a href=""?page=1&size={size}"" onclick=""return {pDisable};"">First</a>
+                <a href=""?page={page - 1}&size={size}"" onclick=""return {pDisable};"">Prev</a>
                 <span> {page} / {pageCount}</span> 
-                <a href=""?page={page + 1}&size={size}"">Next</a>
-                <a href=""?page={pageCount}&size={size}"">Last</a>
+                <a href=""?page={page + 1}&size={size}"" onclick=""return {nDisable};"">Next</a>
+                <a href=""?page={pageCount}&size={size}"" onclick=""return {nDisable};"">Last</a>
             </div>
             ";
         return html;
